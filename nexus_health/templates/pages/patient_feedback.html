@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}  
+  
+{% block content %}
+
+
+<main class="site-content">
+    <div class="page_header" style="background-image: url('{% static 'img/res.jpg' %}')">
+    <div class="page_header d-flex align-items-center">
+
+        <div class="container">
+
+            <section>
+
+                <h2>Patient Feedback</h2>
+
+                <div class="breadcrumbs">
+
+                    <a href="{% url 'home'%}">Home</a>
+
+                    <span>Patient Feedback</span>
+
+                </div>
+
+            </section>
+
+        </div>
+    </div>
+    </div><!-- /.page_header -->
+    <div class="landing-page"><div class="form-appointment"><div class="wpcf7" id="wpcf7-f560-p590-o1">
+        {% for message in messages %}
+        {% if message.tags == 'success' %}
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+             {{message}}
+         <button type"button" class="close" data-dismiss="alert" aria-label="Close">
+         <span aria-hidden="true">&times;</span>
+         </button>
+         </div>
+         {% endif %}
+     {% endfor %}  
+    <form action="{% url 'patient_feedback' %}" method="POST" class="wpcf7-form" novalidate="novalidate" _lpchecked="1">
+        {% csrf_token %}
+      
+<div style="display: none;">
+
+<input type="hidden" name="_wpcf7" value="560">
+
+<input type="hidden" name="_wpcf7_version" value="3.5">
+
+<input type="hidden" name="_wpcf7_locale" value="">
+
+<input type="hidden" name="_wpcf7_unit_tag" value="wpcf7-f560-p590-o1">
+
+<input type="hidden" name="_wpnonce" value="dbb28877d5">
+
+</div>
+  
+<div class="group">
+
+    <div style="width: 48%; float: left;">
+    
+    <span class="wpcf7-form-control-wrap text-680"><input type="text" name="patient_name" value="" size="45" class="wpcf7-form-control wpcf7-text wpcf7-validates-as-required" aria-required="true" placeholder="Name" ></span><br>
+    <span class="wpcf7-form-control-wrap text-680"><input type="file"  id="myFile" name="image" value=""  aria-required="true"></span><br><br>
+    <span class="wpcf7-form-control-wrap textarea-398"><textarea name="message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" placeholder="Your Feedback"></textarea></span></div>
+    
+    </div>
+
+<div style="text-align: center; padding-top: 2em; border-top: 1px solid #000; margin-top: 1em;"><input type="submit" value="Submit" class="wpcf7-form-control wpcf7-submit"><img class="ajax-loader" src="http://www.professionalaudiologicalservices.com/wp-content/plugins/contact-form-7/images/ajax-loader.gif" alt="Sending ..." style="visibility: hidden;"></div>
+
+<div class="wpcf7-response-output wpcf7-display-none"></div></form></div></div></div>
+
+
+</main><!-- /.site-content -->
+
+
+{% endblock %}

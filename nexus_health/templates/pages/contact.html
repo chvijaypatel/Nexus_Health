@@ -1,0 +1,107 @@
+{% extends 'base.html' %}
+{% load static %}  
+  
+{% block content %}
+<main class="site-content">
+    {% for i in contact_page %}
+    <div class="page_header" style="background-image: url('{{i.header_image.url}}')">
+    <div class="page_header d-flex align-items-center">
+        <div class="container">
+            <section>
+                <h2>Contact Us</h2>
+                <div class="breadcrumbs">
+                    <a href="{% url 'home'%}">Home</a>
+                    <span>Contact</span>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endfor %}
+    <!-- /.page_header -->
+    <div class="contact-area">
+        {% for i in contact_details %}
+        <div class="the_contacts">
+            <div class="container-lg">
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="the_contact clearfix wow slideInUp">
+                            <i class="icofont-ui-call"></i>
+                            <section>
+                                <h3>Phone:</h3>
+                                <p>{{i.phoneno1}}</p>
+                                <p>{{i.phoneno2}}</p>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-3 mt-md-0">
+                        <div class="the_contact clearfix wow slideInUp">
+                            <i class="icofont-envelope-open"></i>
+                            <section>
+                                <h3>Email:</h3>
+                                <p>{{i.email1}}</p>
+                                <p>{{i.email2}}</p>
+                            </section>
+                        </div>
+                    </div>
+                    <div class="col-md-4 mt-3 mt-md-0">
+                        <div class="the_contact clearfix wow slideInUp">
+                            <i class="icofont-google-map"></i>
+                            <section>
+                                <h3>Address:</h3>
+                                <p>{{i.address_l1}}</p>
+                                <p>{{i.address_l2}}</p>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="section-header text-center col-xl-7">
+                    <h2>Interested in discussing? Contact Now.</h2>
+                    {% for i in contact_page %}
+                    <p>{{i.contact_now_pargraph}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                {% for message in messages %}
+                {% if message.tags == 'success' %}
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                     {{message}}
+                 <button type"button" class="close" data-dismiss="alert" aria-label="Close">
+                 <span aria-hidden="true">&times;</span>
+                 </button>
+                 </div>
+                 {% endif %}
+             {% endfor %}
+                <div class="col-xl-10">
+                    <form action="{% url 'contact' %}" method="POST" class="d-flex flex-wrap justify-content-between contact-form">
+                        {% csrf_token %}
+                        <div class="inputs">
+                            <input type="text" name="name" placeholder="Name:">
+                            <input type="email" name="email" placeholder="Email:">
+                            <input type="text" name="phoneno" placeholder="Phone:">
+                        </div>
+                        <div class="text-area text-center">
+                            <textarea placeholder="Message:" name="message"></textarea>
+                            <button type="submit" class="theme-btn">
+                                Send Message <i class="icofont-arrow-right"></i>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <center>
+        <div class="mapouter"><div class="gmap_canvas"><iframe class="gmap_iframe" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?width=1300&amp;height=400&amp;hl=en&amp;q=4944 Winchell Rd  Mantua, Ohio(OH), 44255&amp;t=&amp;z=10&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a href="https://www.kokagames.com/fnf-friday-night-funkin-mods/">FNF Mods</a></div><style>.mapouter{position:relative;text-align:right;width:1300px;height:400px;}.gmap_canvas {overflow:hidden;background:none!important;width:1300px;height:400px;}.gmap_iframe {width:1300px!important;height:400px!important;}</style></div>
+        </center>
+    </div>
+    
+</main><!-- /.site-content -->
+
+
+{% endblock %}

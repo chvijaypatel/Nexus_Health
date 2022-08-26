@@ -1,0 +1,314 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<main class="site-content">
+    <div class="hero-section">
+        {% for i in homebanners1 %}
+        <div class="hero-section" style="background-image: url('{{i.image.url}}')">
+        <div class="container-lg h-100 px-lg-0">
+            <div class="row h-100 justify-content-lg-start justify-content-center align-items-center">
+                <div class="col-xl-6 col-lg-8">
+                    <div class="hero-content">
+                        <h3>{{i.title}}</h3>
+                        <h2>{{i.heading}}.</h2>
+                        <p>{{i.paragraph|safe}}.</p>
+                        <a href="{{i.link}}" class="theme-btn"> {{i.buttontext}} <i class="icofont-arrow-right"></i> </a>
+                        
+                    
+                    </div>
+                </div>
+            </div>
+            <div class="row rowbutton">
+            <div class="col-md-2"><button type="button" class="btn btn-info what-info">What's New</button></div>
+            <div class="col-md-4"><button type="button" class="btn btn-info connect-info">Connect Health Change Webinars</button></div>
+            <div class="col-md-4"><a href="{% url 'services_feedback'%}"><button type="button" class="btn btn-info waiting-info">Provide GP Services feedback</button></div></a>
+            <div class="col-md-2"><a href="{% url 'patient_feedback'%}"> <button type="button" class="btn btn-info how-info">Provide feedback </button></div></a>
+        </div>
+    </div>
+        </div>
+    {% endfor %}
+    </div><!-- /.hero-section -->
+
+    <div class="cta-section">
+            {% include 'includes/contact_us.html' %}
+    </div><!-- /.cta-section -->
+
+    <div class="service-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="section-header text-center col-lg-8">
+                    {% for i in services_department %}
+                    <h2> {{i.title}}</h2>
+                    <p> {{i.paragraph|safe}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <div class="container-xl px-xl-0">
+            <div class="row no-gutters">
+                {% for i in services_department_card %}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="service-card">
+                        <i class="{{i.icon_class_name}}"></i>
+                        <h2>{{i.department_name}}</h2>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div><!-- /.service-section -->
+    
+
+    <!-- Testimonials Section -->
+
+    <div class="bg-dark p-12 mx-auto mt-3 mb-3" style="height:580px">
+        <div id="carouselTestimonial" class="carousel carousel-testimonial slide" data-ride="carousel">
+        <ol class="carousel-indicators">
+        <li data-target="#carouselTestimonial" data-slide-to="0" class="active"></li>
+        <li data-target="#carouselTestimonial" data-slide-to="1"></li>
+        <li data-target="#carouselTestimonial" data-slide-to="2"></li> 
+        </ol>
+        <center>
+        <h1 class="gpServicesfeedback">GP Services feedback</h1>
+        </center>
+        <div class="carousel-inner">
+            {% for i in gp_services_feedback %}
+            <div class="carousel-item text-center {% if forloop.counter0 == 0 %} active {% endif %}">
+                <i class="fa fa-quote-left"></i>
+                <h5 class="mt-4 mb-0"><strong class="text-warning text-uppercase">{{i.customer_name}}</strong></h5>
+                <h6 class="text-dark m-0">{{i.designation}}</h6>
+                <p class="m-0 pt-3">{{i.message}}</p>
+                <span class="fa fa-star checked"></span>
+               <span class="fa fa-star checked"></span>
+               <span class="fa fa-star checked"></span>
+               <span class="fa fa-star checked"></span>
+               <span class="fa fa-star checked"></span><br>
+               <h6 class="text-dark m-0">{{i.designation}}</h6>
+                <i class="fa fa-quote-right"></i>
+            </div>
+            {% endfor %}
+           
+        </div>
+       
+        <a class="carousel-control-prev" href="#carouselTestimonial" role="button" data-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#carouselTestimonial" role="button" data-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+        </a>
+        </div>
+      </div>
+   
+<!-- End testimonials Section -->
+
+<br>
+
+    <div class="video-section">
+        {% for i in video_section %}
+        <div class="container-xl px-xl-0">
+            <div class="video-section-content">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 order-lg-2 order-1">
+                        <div class="video-banner">
+                            <img src="{{i.image.url}}" alt="Video Banner" />
+                            <a href="#" class="play-video" data-toggle="modal" data-target="#popup-video">
+                                <i class="icofont-ui-play text-white"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6 px-xl-5 order-lg-1 order-2">
+                        <section>
+                            <h3>{{i.title}}</h3>
+                            <h2>{{i.paragraph|safe}}</h2>
+                            <a href="#" class="theme-btn">{{i.buttontext}}<i class="icofont-arrow-right"></i> </a>
+                        </section>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+<br>
+      
+    <div class="fun-facts">
+        {% for i in fun_facts %}
+        <div class="fun-facts" style="background-image: url('{{i.bg_image.url}}')">
+        <div class="container-xl px-xl-0">
+            <div class="row justify-content-lg-between align-items-center">
+                <div class="col-xl-5 col-lg-6 pr-xl-0">
+                    <section class="contact-methods">
+                        <h2>{{i.title}}</h2>
+                        <ul>
+                            <li>
+                                <i class="icofont-headphone-alt-1"></i>
+                                <span>{{i.mobileno}}</span>
+                            </li>
+                            <li>
+                                <span>{{i.email}}</span>
+                                <i class="icofont-envelope-open"></i>
+                            </li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="col-lg-6">
+                    <div class="fun-facts-area">
+                        <h2>{{i.sub_title}}</h2>
+                        <p>
+                            {{i.paragraph|safe}}
+                        </p>
+                        <ul class="clearfix">
+                            <li>
+                                <i class="icofont-woman-in-glasses"></i>
+                                <div class="the_fact">
+                                    <h3 class="counter">{{i.satisfied_clients_count}}</h3>
+                                    <p>Satisfied Clients</p>
+                                </div>
+                            </li>
+                            <li>
+                                <i class="icofont-award"></i>
+                                <div class="the_fact">
+                                    <h3 class="counter">{{i.world_awards_count}}</h3>
+                                    <p>World Awards</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        {% endfor %}
+    </div><!-- /.fun-facts -->
+    <br>
+ <section id="testimonial">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <center>
+                <div class="section-title">
+                    <h2 style="padding: 50px 0px 30px 0px; color: #fff;">Patient Testimonial</h2>
+                </div>
+                </center>
+            </div>
+            <div class="col-lg-12">
+                <div id="testimonialCarousel" class="carousel slide" data-ride="carousel">
+                    <!-- Slide Indicators -->
+                    <ol class="carousel-indicators">
+                        <li data-target="#testimonialCarousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#testimonialCarousel" data-slide-to="1"></li>
+                        <li data-target="#testimonialCarousel" data-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner" role="listbox">
+                        {% for i in patient_testimonial %}
+                        <!-- Slide 1 -->
+                        <div class="carousel-item {% if forloop.counter0 == 0 %} active {% endif %}">
+                            <div class="carousel-content">
+                                <center>
+                                <img class="d-block w-100 rounded-circle" src="{{i.image.url}}" alt="First slide" style="height: 100px; max-width:100px"></center>
+
+                                <p class="textsizerow"><i class="fa fa-quote-left"></i> <i>{{i.message}}</i></p>
+                                <h3 class="textsizerowcolor"><span>-</span> {{i.patient_name}}  <span>-</span> <i class="fa fa-quote-right"></i> </h3>
+                                 
+                            </div>
+                        </div>
+                        {% endfor %}
+                        <!-- Slider pre and next arrow -->
+                        <a class="carousel-control-prev text-white" href="#testimonialCarousel" role="button" data-slide="prev">
+                            
+                        </a>
+                        <a class="carousel-control-next text-white" href="#testimonialCarousel" role="button" data-slide="next">
+                        
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<br>
+
+<div class="testimony-section">
+    <div class="blog-section">
+        <div class="container-md px-md-0">
+            <div class="d-flex flex-wrap blog-section-header justify-content-xl-between text-xl-left text-center align-items-center">
+                <div class="col-xl-5">
+                    <h2>Get <span>Every Single</span> Updates Here.</h2>
+                </div>
+                <div class="col-xl-5 pl-xl-0">
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+                </div>
+                <div class="col-xl-2">
+                    <div class="blog-carousel-control">
+                        <span class="blog-carousel-nav btn-prev">
+                            <i class="icofont-arrow-left"></i>
+                        </span>
+                        <span class="blog-carousel-nav btn-next">
+                            <i class="icofont-arrow-right"></i>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-md px-md-0">
+            <div class="row">
+                <div class="slide-progress"></div>
+                <div class="blog-carousel owl-carousel">
+                    {% for post in post_list %}
+                    <div class="blog-card d-flex flex-sm-row flex-column">
+                        <div class="the_post_thumbnail">
+                            <img src="{{post.blogs_img.url}}" alt="Blog Title" />
+                        </div>
+                        <div class="blog-card-body">
+                            <span class="the_date">{{post.publish_date}}</span>
+                            <h2 class="the_title">
+                                <a href="#">{{post.title}}</a>
+                            </h2>
+                            <a href="{% url 'post_detail' post.slug  %}" class="the_permalink">Read more <i class="icofont-arrow-right"></i></a>
+                            <span class="the_time">{{ post.get_date }}</span>
+                        </div>
+                    </div>
+                    {% endfor %}
+                   
+                </div>
+            </div>
+        </div>
+   
+    </div><!-- /.blog-section -->
+    
+          <div class="mission-vission">
+            {% for i in opening_hours %}
+            <div class="container">
+         <div class="container-fluid stat-container orange">
+                <div class="row textcolorrow1">
+                    <div class="col-md-8 row">
+                        <h3 class="h3 text toppadding">{{i.title}}</h3>
+                        
+                        <span class="span textsizespan">{{i.paragraph|safe}}<br>
+                        <button class="btn btn-primary row1">Read More</button></span>
+                    </div>
+                    <div class="col-md-4 row4">
+                    <h3 class="textsizeh3">Opening Hours</h3>
+                    <span class="size12">{{i.day_to_day1}}</span><span class="text-right size12">{{i.time_to_time1}}</span><hr class="ad">
+                    <br>
+                    <span class="size12">{{i.day_to_day2}}<span class="text-right size12">{{i.time_to_time2}}</span><hr class="ad"></span>
+
+                    </div>
+                </div> 
+            </div>     
+          </div>
+        </div>
+        {% endfor %}
+        </div><!-- /.mission-vission -->
+
+</main><!-- /.site-content -->
+
+
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}  
+  
+{% block content %}
+<main class="site-content">
+    <div class="page_header d-flex align-items-center">
+        <div class="container">
+            <section>
+                <h2>404_Error.</h2>
+                <div class="breadcrumbs">
+                    <a href="{% url 'home'%}">Home</a>
+                    <span>Blog</span>
+                </div>
+            </section>
+        </div>
+    </div><!-- /.page_header -->
+    <div class="error_404">
+        <figure>
+            <img src="{% static 'img/404.png'%}" alt="404 error">
+        </figure>
+        <a href="/" class="theme-btn">Back To Home</a>
+    </div>
+</main><!-- /.site-content -->
+
+
+{% endblock %}

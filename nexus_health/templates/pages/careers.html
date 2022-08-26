@@ -1,0 +1,172 @@
+{% extends 'base.html' %}
+{% load static %}  
+  
+{% block content %}
+
+<main class="site-content">
+    {% for i in careers_page %}
+    <div class="page_header" style="background-image: url('{{i.header_image.url}}')">
+    <div class="page_header d-flex align-items-center">
+        <div class="container">
+            <section>
+                <h2>Careers</h2>
+                <div class="breadcrumbs">
+                    <a href="#">Home</a>
+                    <span>Careers</span>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+{% endfor %}
+    <!-- /.page_header -->
+    <div class="service_single">
+        <div class="container">
+            {% for message in messages %}
+            {% if message.tags == 'success' %}
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                 {{message}}
+             <button type"button" class="close" data-dismiss="alert" aria-label="Close">
+             <span aria-hidden="true">&times;</span>
+             </button>
+             </div>
+             {% endif %}
+         {% endfor %}
+            <div class="row justify-content-xl-between">
+                 <div class="col-xl-7">
+                    <div class="single_service_content">
+                        {% for job_post in job_post %}
+                        <div class="service_thumbnail careers_thumbnail">
+                           <h6 style="color: #333; font-size: 16px; font-weight: 700;  padding-bottom: 10px;">{{job_post.job_title}}</h6>
+                            <div class="row">
+                               <div class="col-md-4">
+
+                                 <p>{{job_post.department_name}}</p>   
+                               </div>
+                               <div class="col-md-4">
+                                  <p><i class="fa fa-user"></i>{{job_post.author}}</p>
+                               </div>
+                           </div>
+                          
+                           <div class="row">
+                               <div class="col-md-4">
+                                 <p><i class="icofont-envelope-open"></i>{{job_post.experience}}</p>   
+                               </div>
+                               <div class="col-md-4">
+                                   <p><i class="icofont-arrow-right"></i>{{job_post.status}}</p>
+                               </div>
+                               <div class="col-md-4">
+                                   <p><i class="icofont-google-map"></i>{{job_post.loaction}}</p>
+                               </div>
+                           </div>
+                            <p><i class="icofont-double-right"></i>{{job_post.job_description|truncatewords:10|safe}}</p>
+                            <a href="{% url 'job_detail' job_post.slug  %}" class="the_permalink"><button type="button" class="btn btn-primary">Read more <i class="icofont-arrow-right"></button></i></a>
+                            <div class="row">
+                               <div class="col-md-4">
+                                 <p class="pclass"> Last Date Apply:{{job_post.last_date_applay}}</p>   
+                               </div>
+                               <div class="col-md-4">
+
+                               </div>
+
+                               <div class="col-md-4">
+                                <div class="container mt-3">
+                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Apply Now</button>
+                              <div class="modal fade" id="myModal">
+                                <div class="modal-dialog">
+                                  <div class="modal-content">
+                                  
+                                    <!-- Modal Header -->
+                                    <div class="modal-header">
+                                      <h4 class="modal-title">Job Application Forms</h4>
+                                      <button type="button" class="close" data-dismiss="modal">×</button>
+                            </div>
+                                     <!-- Modal body -->
+                            <div class="modal-body">
+                            <div class="row justify-content-center">
+                            <div class="col-xl-10">
+                           <form  method="POST" class="d-flex flex-wrap justify-content-between contact-form">
+                            {% csrf_token %}
+                             <div class="inputs">
+                              <input type="text" name="name" placeholder="Name:">
+                              <input type="email" name="email" placeholder="Email:">
+                              <input type="text" name="phoneno" placeholder="Phone:">
+                              <input type="text" name="subject" placeholder="Subject:">
+                              <input type="file"  id="myFile" name="file">
+                              <button type="submit" class="btn btn-primary">Submit</button>
+                                 </div>
+                                </form>
+                            </div>
+                            </div>
+                            </div>
+                       </div>
+                       </div>
+                       </div>
+                       </div>
+                       </div>
+            </div>
+            </div>
+          
+            {% endfor %}    
+            
+
+           {% if jobs.has_other_pages %}
+            <div class="pagination">
+                {% if jobs.has_previous %}
+                <li><a  href="?page={{ jobs.previous_page_number }}">&laquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&laquo;</span></li>
+                {% endif %}
+                {% for i in jobs.paginator.page_range %}
+                {% if jobs.number == i %}
+                <li class="active" ><span>{{ i }} <span class="sr-only">(current)</span></span></li>
+               {% else %}
+               <li><a href="?page={{ i }}">{{ i }}</a></li>
+                {% endif %}
+               {% endfor %}
+               
+                {% if jobs.has_next %}
+                <li><a href="?page={{ jobs.next_page_number }}">&raquo;</a></li>
+                {% else %}
+                <li class="disabled"><span>&raquo;</span></li>
+                {% endif %} 
+                
+            </div>
+            {% endif %}
+                        
+            </div>
+            </div>
+
+                <div class="col-xl-4 pl-xl-0 asideRightFixed">
+                    <aside>
+                        <div class="service-widget">
+                            <h2>All Departments:</h2>
+                            <ul>
+                                {% for i in all_departments %}
+                                <li>
+                                    <a href="{{i.link}}">
+                                        <i class="icofont-double-right"></i>
+                                        {{i.department_name}}
+                                    </a>
+                                </li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+
+                      
+                    </aside>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+     
+
+</main><!-- /.site-content -->
+
+{% endblock %}
+
+
+
+           

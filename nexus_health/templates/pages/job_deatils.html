@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% load static %}  
+  
+{% block content %}
+
+<main class="site-content">
+    
+    <div class="page_header" style="background-image: url('{% static 'img/res.jpg' %}')">
+    <div class="page_header d-flex align-items-center">
+        <div class="container">
+            <section>
+                <h2>Job Detail</h2>
+                <div class="breadcrumbs">
+                    <a href="#">Home</a>
+                    <span>Job Detail</span>
+                </div>
+            </section>
+        </div>
+    </div>
+</div>
+
+<div class="blog_post">
+    <div class="container-xl">
+        <div class="the_post_container">
+            <!-- the_post start -->
+            {% for job_post in job_post %}
+            <div class="the_post">
+                <h2 class="the_title"> {{ job_post.job_title }}</h2>
+                <div class="post_info">
+                    <a href="#" class="the_name">By {{ job_post.author }}</a>
+                    <a href="#" class="date_time">{{job_post.publish_date}}</a>
+                </div>
+                <p>{{ job_post.job_description|safe }}</p>
+                </div>
+                <div class="col-md-4">
+                    <div class="container mt-3">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Apply Now</button>
+                  <div class="modal fade" id="myModal">
+                    <div class="modal-dialog">
+                      <div class="modal-content">
+                      
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                          <h4 class="modal-title">Job Application Forms</h4>
+                          <button type="button" class="close" data-dismiss="modal">×</button>
+                </div>
+                         <!-- Modal body -->
+                <div class="modal-body">
+                <div class="row justify-content-center">
+                <div class="col-xl-10">
+               <form  method="POST" class="d-flex flex-wrap justify-content-between contact-form">
+                {% csrf_token %}
+                 <div class="inputs">
+                  <input type="text" name="name" placeholder="Name:">
+                  <input type="email" name="email" placeholder="Email:">
+                  <input type="text" name="phoneno" placeholder="Phone:">
+                  <input type="text" name="subject" placeholder="Subject:">
+                  <input type="file"  id="myFile" name="file">
+                  <button type="submit" class="btn btn-primary">Submit</button>
+                     </div>
+                    </form>
+                </div>
+                </div>
+                </div>
+              {% endfor %}
+              <br>
+            <!-- the_post end -->
+    
+{% endblock %}
+
+
+
+           

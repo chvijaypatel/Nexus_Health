@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% load static %}  
+  
+{% block content %}
+
+<main class="site-content">
+    {% for i in about_us_page %}
+    <div class="page_header" style="background-image: url('{{i.header_image.url}}')">
+    <div class="page_header d-flex align-items-center">   
+        <div class="container">
+            <section>
+                <h2>About Us.</h2>
+                <div class="breadcrumbs">
+                    <a href="{% url 'home'%}">Home</a>
+                    <span>About</span>
+                </div>
+            </section>
+        </div>
+    </div>
+    </div>
+    {% endfor %}
+    <!-- /.page_header -->
+    <div class="about-section">
+        <div class="container">
+            <div class="row justify-content-xl-between ">
+                <div class="col-xl-5 pr-xl-0 text-sm-left text-center">
+                    <div class="row">
+                        <div class="col-xl-12 col-md-6 mb-xl-5">
+                            {% for i in about_us_page %}
+                            <img src="{{i.image1.url}}"  style="height:500px; width:487px;" alt="About us" class="imgrow">
+                            {% endfor %}
+                        </div>
+                    
+                    </div>
+                </div>
+                <div class="col-xl-6">
+                   
+                        <h2 class="textbody">Nexus Health</h2>
+                        {% for i in about_paragrap %}
+                        <p class="psize">{{i.paragraph|safe}}</p>
+                        {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div><!-- /.about-section -->
+    <div class="mission-vission">
+        <div class="container">
+            <div class="row justify-content-xl-between justify-content-center">
+                {% for i in about_us_page %}
+                <div class="col-xl-5 order-xl-2 order-1 text-xl-left text-center">
+                    <img src="{{i.image2.url}}"  style="height:500px; width:487px;" alt="Mission & Vission">
+                </div>
+                <div class="col-xl-6 order-xl-1 order-2">
+                    <section>
+                        <h2>Our Mission & Vission.</h2>
+                        <p>{{i.paragraph_Mission|safe}}</p>
+                        <ul>
+                            {% for i in mission_tags %}
+                            <li>{{i.tags}}</li>
+                            {% endfor %}
+                        </ul>
+                    </section>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div><!-- /.mission-vission -->
+
+    <div class="cta-section cta-bg">
+            {% include 'includes/contact_us.html' %}
+    </div><!-- /.cta-section -->
+    
+    <div class="team-section mb-125">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="section-header text-center col-lg-8">
+                    <h2>Professional Care Provider</h2>
+                    {% for i in about_us_page %}
+                    <p>{{i.paragraph_Care_Provider|safe}}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        <div class="container-lg px-lg-0">
+            <div class="row">
+                {% for i in care_provider_team %}
+                <div class="col-xl-3 col-md-4 col-sm-6">
+                    <div class="team-member">
+                        <div class="member-photo">
+                            <img src="{{i.team_member_photo.url}}" alt="Team Member Name" />
+                        </div>
+                        <h2><a href="#">{{i.team_member_name}}</a></h2>
+                        <p><a href="#">{{i.department_name}}</a></p>
+                    </div>
+                </div>
+                {% endfor %}
+                
+                <div class="col-xl-3 col-md-4 col-sm-6">
+                    {% for i in join_our_team %}
+                    <div class="team-member blank">
+                        <h2>{{i.title}}</h2>
+                        <p>{{i.paragraph|safe}}</p>
+                        <a href="{{i.link}}">
+                            <i class="icofont-plus"></i>
+                        </a>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div><!-- /.team-section -->
+    
+</div>
+</main><!-- /.site-content -->
+
+{% endblock %}
